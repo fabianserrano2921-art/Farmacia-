@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+  <title>Sueroterapia | PRP y Tratamientos Faciales</title>
+  <meta name="description" content="Bienestar y belleza desde adentro. Sueroterapia, PRP y tratamientos faciales con atención profesional y resultados visibles. Licda en Enfermería, Cod 23788." />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <script src="script.js?v=2" defer></script>
+
+  <style>
+    /* ── Safe-area support for notched phones ── */
+    :root {
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+    }
+
+    /* ── Tap target minimum 44×44 on mobile ── */
+    @media (max-width: 768px) {
+      button, a, [role="button"] {
+        min-height: 44px;
+      }
+    }
+
+    /* ── Fluid type scale ── */
+    .fluid-h1  { font-size: clamp(2.4rem, 7vw, 5rem); }
+    .fluid-h2  { font-size: clamp(1.8rem, 4.5vw, 3.25rem); }
+    .fluid-h3  { font-size: clamp(1.1rem, 2.5vw, 1.5rem); }
+    .fluid-p   { font-size: clamp(0.9rem, 1.6vw, 1.125rem); }
+
+    /* ── Prevent text overflow on small screens ── */
+    h1, h2, h3, h4, p { overflow-wrap: break-word; hyphens: auto; }
+
+    /* ── Nav: taller hit-area on mobile ── */
+    nav .nav-inner {
+      padding-top: max(1rem, calc(var(--safe-top) + 0.75rem));
+    }
+
+    /* ── Mobile drawer: smoother open/close ── */
+    #nav-drawer {
+      will-change: transform;
+    }
+
+    /* ── Hero: better vertical rhythm on phones ── */
+    @media (max-width: 640px) {
+      .hero-section {
+        min-height: calc(100svh - 64px);
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+      }
+      .hero-img-secondary { display: none !important; }
+    }
+
+    /* ── Cards: equal height in grid rows ── */
+    .card-grid > * {
+      display: flex;
+      flex-direction: column;
+    }
+    .card-grid .card-body {
+      flex: 1;
+    }
+
+    /* ── Promo grid: disable stagger-offset on mobile (prevents cut-off) ── */
+    @media (max-width: 767px) {
+      .promo-offset { transform: none !important; }
+      .catalog-offset { transform: none !important; }
+    }
+
+    /* ── Scroll snap for promo cards on mobile ── */
+    @media (max-width: 767px) {
+      .promo-scroll {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        scrollbar-width: none;
+      }
+      .promo-scroll::-webkit-scrollbar { display: none; }
+      .promo-scroll > * {
+        flex: 0 0 80vw;
+        scroll-snap-align: center;
+        transform: none !important;
+      }
+    }
+
+    /* ── Horizontal scroll hint fade ── */
+    @media (max-width: 767px) {
+      .scroll-fade-right {
+        position: relative;
+      }
+      .scroll-fade-right::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 3rem;
+        background: linear-gradient(to left, #f9f6ef, transparent);
+        pointer-events: none;
+        z-index: 2;
+      }
+    }
+
+    /* ── Catalog: 2-col on tablet, 4-col on desktop, 1-col on mobile ── */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 480px) {
+      .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .catalog-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    }
+
+    /* ── Benefits: 2-col on mobile, 4-col desktop ── */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    @media (min-width: 1024px) {
+      .benefits-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    }
+
+    /* ── CTA block: stack cleanly on mobile ── */
+    @media (max-width: 767px) {
+      .cta-block { flex-direction: column; gap: 2rem; }
+      .cta-block .cta-left,
+      .cta-block .cta-right { text-align: center; }
+      .cta-block .cta-btns { justify-content: center; }
+    }
+
+    /* ── Promo grid: 3-col on desktop ── */
+    .promo-grid-desktop {
+      display: none;
+    }
+    @media (min-width: 768px) {
+      .promo-grid-desktop { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+      .promo-scroll-mobile { display: none; }
+    }
+
+    /* ── Footer: stack gracefully ── */
+    @media (max-width: 640px) {
+      .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+      }
+    }
+
+    /* ── FAB: respect safe-area ── */
+    .fab-wrap {
+      bottom: calc(2rem + var(--safe-bottom));
+      right: calc(2rem + var(--safe-right));
+    }
+
+    /* ── Touch: no sticky hover on mobile cards ── */
+    @media (hover: none) {
+      .group:hover .group-hover\:scale-110 { transform: none; }
+      .group:hover { box-shadow: none !important; }
+    }
+
+    /* ── Smooth momentum scrolling (iOS) ── */
+    html { -webkit-overflow-scrolling: touch; }
+
+    /* ── Hero image: contain on very small screens ── */
+    @media (max-width: 480px) {
+      .hero-img-main {
+        aspect-ratio: 3/4;
+        max-height: 55vw;
+      }
+    }
+
+    /* ── Section spacing: tighter on mobile ── */
+    .section-py {
+      padding-top: clamp(3rem, 8vw, 8rem);
+      padding-bottom: clamp(3rem, 8vw, 8rem);
+    }
+    .section-px {
+      padding-left: clamp(1rem, 5vw, 2rem);
+      padding-right: clamp(1rem, 5vw, 2rem);
+    }
+
+    /* ── Active states for touch ── */
+    button:active, a:active {
+      opacity: 0.75;
+      transform: scale(0.97);
+      transition: all 0.1s;
+    }
+
+    /* ── Sticky nav background on scroll (handled in JS, just ensure backdrop) ── */
+    nav.fixed {
+      padding-top: var(--safe-top);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+
+  <!-- ═══════════════════ TOP NAV ═══════════════════ -->
+  <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl transition-shadow duration-300">
+    <div class="nav-inner flex justify-between items-center px-5 pb-4 md:px-8 max-w-7xl mx-auto pt-4">
+
+      <div class="text-2xl font-semibold italic text-purple-950 font-headline tracking-wide">Sueroterapia</div>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex gap-8 items-center">
+        <a class="text-purple-900 font-bold border-b-2 border-purple-400 pb-1 font-headline tracking-wide" href="#">Inicio</a>
+        <a class="text-slate-600 hover:text-purple-800 transition-colors font-headline tracking-wide" href="#promociones">Promociones</a>
+        <a class="text-slate-600 hover:text-purple-800 transition-colors font-headline tracking-wide" href="#catalogo">Catálogo</a>
+        <a class="text-slate-600 hover:text-purple-800 transition-colors font-headline tracking-wide" href="#beneficios">Beneficios</a>
+      </div>
+
+      <!-- Mobile: phone icon + menu btn -->
+      <div class="flex items-center gap-2 md:hidden">
+        <a href="tel:+50660024222" class="flex items-center justify-center w-11 h-11 rounded-full bg-surface-container text-primary" aria-label="Llamar">
+          <span class="material-symbols-outlined text-xl">phone</span>
+        </a>
+        <button id="menu-btn" class="flex items-center justify-center w-11 h-11 rounded-full text-purple-900" aria-label="Menú">
+          <span class="material-symbols-outlined text-3xl">menu</span>
+        </button>
+      </div>
+
+      <!-- Desktop CTA -->
+      <button data-wa="Hola, me gustaría agendar una cita en Sueroterapia." class="hidden md:inline-flex items-center gap-2 cta-gradient text-on-primary px-8 py-2.5 rounded-full font-medium hover:opacity-90 transition-all active:scale-95">
+        <span class="material-symbols-outlined text-base">calendar_month</span>
+        Agendar Cita
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════ MOBILE DRAWER ═══════════════════ -->
+  <div id="drawer-overlay" class="fixed inset-0 z-[55] bg-black/40 hidden transition-opacity"></div>
+  <nav id="nav-drawer" class="fixed inset-y-0 left-0 z-[60] flex flex-col bg-white rounded-r-2xl h-full w-80 shadow-2xl transform -translate-x-full transition-transform duration-300">
+    <div class="px-6 pt-safe-top pb-6 pt-8">
+      <div class="flex items-center justify-between mb-1">
+        <h2 class="font-headline text-2xl italic text-purple-950 tracking-wide">Sueroterapia</h2>
+        <button id="drawer-close" class="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container text-on-surface-variant" aria-label="Cerrar menú">
+          <span class="material-symbols-outlined text-xl">close</span>
+        </button>
+      </div>
+      <p class="text-[10px] text-slate-400 uppercase tracking-widest">Licda en Enfermería · Cod 23788</p>
+    </div>
+
+    <div class="flex flex-col flex-1 overflow-y-auto">
+      <a class="text-slate-700 px-6 py-4 text-base flex items-center gap-4 hover:bg-surface-container-high transition-all active:bg-surface-container-high" href="#">
+        <span class="material-symbols-outlined text-primary">home</span> Inicio
+      </a>
+      <a class="text-slate-700 px-6 py-4 text-base flex items-center gap-4 hover:bg-surface-container-high transition-all" href="#promociones">
+        <span class="material-symbols-outlined text-primary">star</span> Promociones
+      </a>
+      <a class="text-slate-700 px-6 py-4 text-base flex items-center gap-4 hover:bg-surface-container-high transition-all" href="#catalogo">
+        <span class="material-symbols-outlined text-primary">format_list_bulleted</span> Catálogo
+      </a>
+      <a class="text-slate-700 px-6 py-4 text-base flex items-center gap-4 hover:bg-surface-container-high transition-all" href="#beneficios">
+        <span class="material-symbols-outlined text-primary">workspace_premium</span> Beneficios
+      </a>
+    </div>
+
+    <!-- Drawer footer: dual CTA -->
+    <div class="p-6 space-y-3 border-t border-outline-variant/20" style="padding-bottom: calc(1.5rem + env(safe-area-inset-bottom))">
+      <button data-wa="Hola, quiero reservar una cita." class="w-full cta-gradient text-on-primary px-6 py-4 rounded-full font-medium text-sm text-center flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-base">calendar_month</span>
+        Reservar Cita
+      </button>
+      <a href="tel:+50660024222" class="w-full bg-surface-container-highest text-on-secondary-container px-6 py-3.5 rounded-full font-medium text-sm text-center flex items-center justify-center gap-2 hover:bg-surface-dim transition-colors">
+        <span class="material-symbols-outlined text-base">phone</span>
+        Llamar Ahora
+      </a>
+    </div>
+  </nav>
+
+  <main class="pt-20">
+
+    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <section class="hero-section relative flex items-center section-px overflow-hidden min-h-[88svh] md:min-h-[90vh]">
+      <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-8 md:gap-12 items-center py-8 md:py-0">
+
+        <div class="z-10 space-y-6 md:space-y-8 reveal order-2 md:order-1">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-xs md:text-sm font-semibold tracking-wider uppercase">Bienestar desde adentro</span>
+          <h1 class="fluid-h1 font-headline text-primary leading-tight tracking-tight">
+            El arte de la <br/><span class="italic font-normal">renovación</span>
+          </h1>
+          <p class="fluid-p text-on-surface-variant max-w-lg leading-relaxed">
+            Sueroterapia, PRP y tratamientos faciales personalizados. Atención profesional y resultados visibles en un espacio diseñado para tu paz.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <button data-wa="Hola, me gustaría agendar una cita." class="cta-gradient text-on-primary px-8 py-4 rounded-full text-base md:text-lg font-semibold shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform text-center flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined">calendar_month</span>
+              Agendar Cita
+            </button>
+            <a href="#catalogo" class="bg-surface-container-highest text-on-secondary-container px-8 py-4 rounded-full text-base md:text-lg font-semibold hover:bg-surface-dim transition-colors text-center inline-flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined">spa</span>
+              Ver Tratamientos
+            </a>
+          </div>
+        </div>
+
+        <div class="relative reveal-right order-1 md:order-2">
+          <div class="hero-img-main aspect-[4/5] rounded-xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700 max-h-[60vw] md:max-h-none">
+            <img class="w-full h-full object-cover" alt="Clínica Sueroterapia" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQt3diTNU1n5-vDFjq1ieL2E9Re5gWCFjCCs4U8AXOr22DbamcKIWyLdXl8oQhDKaNGUUOZFuvei0GoH8xbg2ueNWsDDwJcWOKuoLaTcthvWHAkWH8ic0WXWEnnzICvd7S5kyBzv_vxPv2ddRnqWiD1ei2uA8z12gpU0c_tSnt-x9gfxp1YZQo3VkkFOnvkSEzgtL1SRFArwGX4-5ov7xLFWix1AwWQP-XW5zc9W70mfJ1BoI4t3b8y6gLgpfzd4kvGOIQ-6yg95U"/>
+          </div>
+          <div class="hero-img-secondary absolute -bottom-8 -left-12 w-64 aspect-square rounded-lg overflow-hidden shadow-2xl -rotate-6 hidden md:block border-8 border-white">
+            <img class="w-full h-full object-cover" alt="Tratamiento Facial" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFqyF6kjYrfmuhbQfqC-8a_6yNiV73g-EkKHGnoycV4KprI4tJGNhdhRn8HLZ7IfA1cOP79YQNID_RjuQAq_FO-oz7eagmz-ABuqZHiVv0mC64_w_q0UxfhYAXCrc9Q3OzXxB2Exi88KAdQZCev2OOCn8_5SOixYL9oPdK8uavK6fT9PneQw4x6O5vLv893yDlSHHhDZj7iKTU-qGgpIf1mX8LOpetQbqkU9oc8BBffTe0yl2sf4BnC7FJP79_lsb27qu4MBk6Uco"/>
+          </div>
+        </div>
+      </div>
+      <div class="absolute top-0 right-0 w-1/3 h-full hero-gradient -z-10 rounded-l-[10rem]"></div>
+    </section>
+
+    <!-- ═══════════════════ PROMOCIONES ═══════════════════ -->
+    <section id="promociones" class="section-py section-px bg-surface-container-low">
+      <div class="max-w-7xl mx-auto">
+
+        <div class="mb-10 md:mb-20 text-center reveal">
+          <h2 class="fluid-h2 font-headline text-on-surface mb-4 md:mb-6">Promociones Exclusivas</h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto text-sm md:text-base">Aprovecha nuestras ofertas especiales en tratamientos seleccionados. Vigentes hasta el 28 de Febrero.</p>
+        </div>
+
+        <!-- Mobile: horizontal scroll carousel -->
+        <div class="promo-scroll-mobile scroll-fade-right">
+          <div class="promo-scroll">
+
+            <div class="reveal reveal-stagger-1 group bg-surface-container-lowest p-4 rounded-lg">
+              <div class="aspect-video rounded-lg overflow-hidden mb-6 bg-primary-container/30 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-6xl group-hover:scale-110 transition-transform duration-500">face_retouching_natural</span>
+              </div>
+              <h3 class="text-lg font-headline text-primary mb-2 px-2">Limpieza Facial Profunda + Dermaplaning</h3>
+              <p class="text-on-surface-variant px-2 mb-4 text-sm">Exfoliación avanzada y limpieza profunda para una piel renovada y luminosa.</p>
+              <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10 mt-auto">
+                <div class="flex items-baseline gap-3">
+                  <span class="font-semibold text-xl text-primary">₡15,000</span>
+                  <span class="text-sm line-through text-outline">₡25,000</span>
+                </div>
+                <button data-promo="Limpieza Facial Profunda + Dermaplaning" class="text-primary font-bold flex items-center gap-1 text-sm">
+                  Agendar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="reveal reveal-stagger-2 group bg-surface-container-lowest p-4 rounded-lg">
+              <div class="aspect-video rounded-lg overflow-hidden mb-6 bg-secondary-container/30 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-6xl group-hover:scale-110 transition-transform duration-500">healing</span>
+              </div>
+              <h3 class="text-lg font-headline text-primary mb-2 px-2">Limpieza Facial Básica + PRP</h3>
+              <p class="text-on-surface-variant px-2 mb-4 text-sm">Bioestimulación con Plasma Rico en Plaquetas para regenerar y dar luminosidad.</p>
+              <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10 mt-auto">
+                <div class="flex items-baseline gap-3">
+                  <span class="font-semibold text-xl text-primary">₡45,000</span>
+                  <span class="text-sm line-through text-outline">₡60,000</span>
+                </div>
+                <button data-promo="Limpieza Facial Básica + PRP" class="text-primary font-bold flex items-center gap-1 text-sm">
+                  Agendar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="reveal reveal-stagger-3 group bg-surface-container-lowest p-4 rounded-lg">
+              <div class="aspect-video rounded-lg overflow-hidden mb-6 bg-tertiary-container/30 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-6xl group-hover:scale-110 transition-transform duration-500">water_drop</span>
+              </div>
+              <h3 class="text-lg font-headline text-primary mb-2 px-2">Limpieza Facial Profunda + Esperma de Salmón</h3>
+              <p class="text-on-surface-variant px-2 mb-4 text-sm">Tratamiento ultrahidratante con polinucleótidos para reparar y rejuvenecer la piel.</p>
+              <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10 mt-auto">
+                <div class="flex items-baseline gap-3">
+                  <span class="font-semibold text-xl text-primary">₡40,000</span>
+                  <span class="text-sm line-through text-outline">₡55,000</span>
+                </div>
+                <button data-promo="Limpieza Facial Profunda + Esperma de Salmón" class="text-primary font-bold flex items-center gap-1 text-sm">
+                  Agendar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Desktop: grid with offsets -->
+        <div class="promo-grid-desktop">
+          <div class="reveal reveal-stagger-1 group bg-surface-container-lowest p-4 rounded-lg hover:shadow-2xl transition-all duration-500">
+            <div class="aspect-video rounded-lg overflow-hidden mb-6 bg-primary-container/30 flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary text-6xl group-hover:scale-110 transition-transform duration-500">face_retouching_natural</span>
+            </div>
+            <h3 class="text-xl font-headline text-primary mb-2 px-2">Limpieza Facial Profunda + Dermaplaning</h3>
+            <p class="text-on-surface-variant px-2 mb-4 text-sm">Exfoliación avanzada y limpieza profunda para una piel renovada y luminosa.</p>
+            <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10">
+              <div class="flex items-baseline gap-3">
+                <span class="font-semibold text-xl text-primary">₡15,000</span>
+                <span class="text-sm line-through text-outline">₡25,000</span>
+              </div>
+              <button data-promo="Limpieza Facial Profunda + Dermaplaning" class="text-primary font-bold hover:underline flex items-center gap-1 text-sm">
+                Agendar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="reveal reveal-stagger-2 group bg-surface-container-lowest p-4 rounded-lg hover:shadow-2xl transition-all duration-500 translate-y-8">
+            <div class="aspect-video rounded-lg overflow-hidden mb-6 bg-secondary-container/30 flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary text-6xl group-hover:scale-110 transition-transform duration-500">healing</span>
+            </div>
+            <h3 class="text-xl font-headline text-primary mb-2 px-2">Limpieza Facial Básica + PRP</h3>
+            <p class="text-on-surface-variant px-2 mb-4 text-sm">Bioestimulación con Plasma Rico en Plaquetas para regenerar y dar luminosidad.</p>
+            <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10">
+              <div class="flex items-baseline gap-3">
+                <span class="font-semibold text-xl text-primary">₡45,000</span>
+                <span class="text-sm line-through text-outline">₡60,000</span>
+              </div>
+              <button data-promo="Limpieza Facial Básica + PRP" class="text-primary font-bold hover:underline flex items-center gap-1 text-sm">
+                Agendar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="reveal reveal-stagger-3 group bg-surface-container-lowest p-4 rounded-lg hover:shadow-2xl transition-all duration-500">
+            <div class="aspect-video rounded-lg overflow-hidden mb-6 bg-tertiary-container/30 flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary text-6xl group-hover:scale-110 transition-transform duration-500">water_drop</span>
+            </div>
+            <h3 class="text-xl font-headline text-primary mb-2 px-2">Limpieza Facial Profunda + Esperma de Salmón</h3>
+            <p class="text-on-surface-variant px-2 mb-4 text-sm">Tratamiento ultrahidratante con polinucleótidos para reparar y rejuvenecer la piel.</p>
+            <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10">
+              <div class="flex items-baseline gap-3">
+                <span class="font-semibold text-xl text-primary">₡40,000</span>
+                <span class="text-sm line-through text-outline">₡55,000</span>
+              </div>
+              <button data-promo="Limpieza Facial Profunda + Esperma de Salmón" class="text-primary font-bold hover:underline flex items-center gap-1 text-sm">
+                Agendar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════ CATÁLOGO ═══════════════════ -->
+    <section id="catalogo" class="section-py section-px">
+      <div class="max-w-7xl mx-auto">
+
+        <div class="mb-10 md:mb-20 reveal">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8">
+            <div class="max-w-xl">
+              <h2 class="fluid-h2 font-headline text-on-surface mb-4 md:mb-6">Nuestros Tratamientos</h2>
+              <p class="text-on-surface-variant leading-relaxed text-sm md:text-base">Protocolos curados pensados para armonizar tu salud, belleza y bienestar integral.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="catalog-grid card-grid">
+
+          <!-- Suero Inmunológico -->
+          <div class="reveal reveal-stagger-1 group bg-surface-container-lowest p-4 rounded-lg hover:shadow-2xl transition-all duration-500">
+            <div class="aspect-square rounded-lg overflow-hidden mb-4">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" alt="Suero Inmunológico" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBupwF3a4rX2sb06Jb6iiGciDTvv25JS2mwLKWSWB8aGawFqJGTuLwo6sd3Xgm3RXyRzsMfF73vam03LZAQkYJ1MucETXDCkb5aHPFpYQQd_PeYKJq2FERLYsJy_c3uZ7DA498bKXedIf82lCwxmvBzc2uQiCAyRxDEq3EJ1VO8MpRUd6L_EfVgFjvzSp32bfT5eJs5zuC_71yht4pHZnxIZ5RunYnWAb0q_qlGPcI8iFMwzf4NWgrMyGQWCCKMcjJXLkHlwxM80XE"/>
+            </div>
+            <div class="card-body px-2">
+              <h3 class="fluid-h3 font-headline text-primary mb-2">Suero Inmunológico</h3>
+              <p class="text-on-surface-variant mb-4 text-sm line-clamp-2">Mega Dosis de Vitamina C + Complejo B y Magnesio para fortalecer tus defensas.</p>
+            </div>
+            <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10">
+              <div class="flex items-baseline gap-2">
+                <span class="font-semibold text-lg text-primary">₡35,000</span>
+                <span class="text-xs line-through text-outline">₡45,000</span>
+              </div>
+              <button data-treatment="Suero Inmunológico" class="text-primary font-bold hover:underline flex items-center gap-1 text-sm">
+                Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Suero Revitalizante -->
+          <div class="reveal reveal-stagger-2 group bg-surface-container-lowest p-4 rounded-lg hover:shadow-2xl transition-all duration-500 catalog-offset md:translate-y-6">
+            <div class="aspect-square rounded-lg overflow-hidden mb-4">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" alt="Suero Revitalizante" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANv9GdJXaEHcG7wW4_XwXMuEwMvrA2nExqdLHszj6FbYg5sC27GQ7ruVgh-7T96so_SFL4C7h8Kjbg2E47Mi6yrYf29wXKfaPYVytrO9HZXpYp8OyonjhJJ5TiJhRa9wDnAbRBgzxOBTcFF3hsoOmK_fjQRcujCQCGjMxU6rWvvqoeXkvePIBy4j2Qx4IPBHFmwVhhYZVypM-v3QKzePrc4ddtL9MJIpjY3BwjC0tHKOjxN3zjHtB_ZaSTXUzS355AS_yZ-Tk_Tms"/>
+            </div>
+            <div class="card-body px-2">
+              <h3 class="fluid-h3 font-headline text-primary mb-2">Suero Revitalizante</h3>
+              <p class="text-on-surface-variant mb-4 text-sm line-clamp-2">Oligoelementos, Complejo B y Vitamina C para recuperar tu energía.</p>
+            </div>
+            <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10">
+              <div class="flex items-baseline gap-2">
+                <span class="font-semibold text-lg text-primary">₡40,000</span>
+                <span class="text-xs line-through text-outline">₡50,000</span>
+              </div>
+              <button data-treatment="Suero Revitalizante" class="text-primary font-bold hover:underline flex items-center gap-1 text-sm">
+                Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Suero Anti-Edad -->
+          <div class="reveal reveal-stagger-3 group bg-surface-container-lowest p-4 rounded-lg hover:shadow-2xl transition-all duration-500">
+            <div class="aspect-square rounded-lg overflow-hidden mb-4">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" alt="Suero Anti-Edad" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByzqojadCcKYXLOTGV05NsWjdIuKdCWNPH1A8XQd7dJBYNCAKQ5PPwXDJrCHlfD1ZTfhmp_UFauNCmqfj5K_jKt-U84nuBugOJDJ_8XT_EK8_ROCrXvYSCIOTlBox9iGX2HvPy2H12cmCe3hJBoNtnq2wZQ-P9My2Iw4GoH9CAOlapvzCXjUg-7gIfZCYLgJwk5kkVxGtdBR26T8M560Y8N5CtHBtgY1kU6kguPtyOZ8JqvMIFm7HgnxYjJrl2f7V6c5vYxd3M0q4"/>
+            </div>
+            <div class="card-body px-2">
+              <h3 class="fluid-h3 font-headline text-primary mb-2">Suero Anti-Edad</h3>
+              <p class="text-on-surface-variant mb-4 text-sm line-clamp-2">Cóctel antioxidante contra radicales libres. Rejuvenecimiento profundo.</p>
+            </div>
+            <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10">
+              <div class="flex items-baseline gap-2">
+                <span class="font-semibold text-lg text-primary">₡50,000</span>
+                <span class="text-xs line-through text-outline">₡65,000</span>
+              </div>
+              <button data-treatment="Suero Anti-Edad" class="text-primary font-bold hover:underline flex items-center gap-1 text-sm">
+                Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- PRP Facial -->
+          <div class="reveal reveal-stagger-4 group bg-surface-container-lowest p-4 rounded-lg hover:shadow-2xl transition-all duration-500 catalog-offset md:translate-y-6">
+            <div class="aspect-square rounded-lg overflow-hidden mb-4">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" alt="PRP Facial" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRMP2p_LId6R5A-KOm6umHE37TVlZdfR7rLYPmrOKAAV1WT3cIBThNlWYQeRR8CrbIvBwEt4E62pfRLc6q9nCt2hkdf8tKgtxJ24lhhS91olScZc2L-pX1v3A75ZzmvtRvCS4tv-wE3JoZSzw2mOcApvA4d8gQKF7TvjZPWpBaCdiVIHb_sYKCBvuO6tJnkGs-sRs4g6xSZJZ9TP0Wq3a01qo3iOuDjKwWKRIU1YdYu_MZqCPwg0GYMbvXud7lyEqIkuX8lYSgq7I"/>
+            </div>
+            <div class="card-body px-2">
+              <h3 class="fluid-h3 font-headline text-primary mb-2">PRP Facial</h3>
+              <p class="text-on-surface-variant mb-4 text-sm line-clamp-2">Plasma Rico en Plaquetas. Bioestimulación y regeneración para luminosidad natural.</p>
+            </div>
+            <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10">
+              <div class="flex items-baseline gap-2">
+                <span class="font-semibold text-lg text-primary">₡45,000</span>
+                <span class="text-xs line-through text-outline">₡60,000</span>
+              </div>
+              <button data-treatment="PRP Facial" class="text-primary font-bold hover:underline flex items-center gap-1 text-sm">
+                Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dermaplaning -->
+          <div class="reveal reveal-stagger-1 group bg-surface-container-lowest p-4 rounded-lg hover:shadow-2xl transition-all duration-500">
+            <div class="aspect-square rounded-lg overflow-hidden mb-4">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" alt="Dermaplaning" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHPJxW9UUTB3LWtL4DKQ__OpXn98t8rJDVXwZKO4LdjgmrNz8OWl1cYHCOHKJv_12CUXXhjK-5LXSl_z38qW5VcQC6GA1-ADFuPQ_SA1ymvUXUMTb2BatGTk3-sX79INudWnlGjTEOb6OgXZ1mwEySTpiBh4fZ9ULA3gL17rgZ__3Kw1ttTeYY43s0tPtkTm3uEcv8-t5-MqhDMY5lraaOHGz2lfRpTgYYFPnTcgSOtj58pq2krQJFzMOBLXiFjXwUfMwumzNmH1I"/>
+            </div>
+            <div class="card-body px-2">
+              <h3 class="fluid-h3 font-headline text-primary mb-2">Dermaplaning</h3>
+              <p class="text-on-surface-variant mb-4 text-sm line-clamp-2">Exfoliación física para eliminar vello fino y piel muerta. Piel de seda al instante.</p>
+            </div>
+            <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10">
+              <div class="flex items-baseline gap-2">
+                <span class="font-semibold text-lg text-primary">₡18,000</span>
+                <span class="text-xs line-through text-outline">₡25,000</span>
+              </div>
+              <button data-treatment="Dermaplaning" class="text-primary font-bold hover:underline flex items-center gap-1 text-sm">
+                Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Limpieza Profunda -->
+          <div class="reveal reveal-stagger-2 group bg-surface-container-lowest p-4 rounded-lg hover:shadow-2xl transition-all duration-500 catalog-offset md:translate-y-6">
+            <div class="aspect-square rounded-lg overflow-hidden mb-4">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" alt="Limpieza Profunda" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyXvCV3DphM4lvlUGOeiVFAUC1vcSzyFeCO9lvVZtKKM8LWFs9iNq5rnNImhYRJgXVhM8O6KNvao7cjcyNnkC_Y6Oj5LVe_euS2AXVfyPMgFz_KgqrnqJ27n8Fk_CoVqylNoyvKs-0oAzQJT1ZeutnAoNUvr19s6kJu6RKmFvVYf7JkwRK9ZcHa2A2HVN_g_k-31oUwPTzNP0-z7V1m4kP2VFNfWO7S1rr7BW2zDyQIlGUdU7y84UG6poEcVVBnbcYrXeZyrcgOvQ"/>
+            </div>
+            <div class="card-body px-2">
+              <h3 class="fluid-h3 font-headline text-primary mb-2">Limpieza Profunda</h3>
+              <p class="text-on-surface-variant mb-4 text-sm line-clamp-2">Elimina impurezas con extracciones controladas e hidratación para un cutis renovado.</p>
+            </div>
+            <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10">
+              <div class="flex items-baseline gap-2">
+                <span class="font-semibold text-lg text-primary">₡20,000</span>
+                <span class="text-xs line-through text-outline">₡30,000</span>
+              </div>
+              <button data-treatment="Limpieza Facial Profunda" class="text-primary font-bold hover:underline flex items-center gap-1 text-sm">
+                Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Hollywood Peel -->
+          <div class="reveal reveal-stagger-3 group bg-surface-container-lowest p-4 rounded-lg hover:shadow-2xl transition-all duration-500">
+            <div class="aspect-square rounded-lg overflow-hidden mb-4">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" alt="Hollywood Peel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPq3AdMZ6XEZ4FkC8Flxuf3aOurAhgvNHkhel60ga2pGY18vukD-rewoBy6PfwlqNze-uWR-AoSMh9yCxmz7G1D0H-uYChZmdKT8IzdWeyItCFpJA01fnff8MsaBWFFRnxvMbgACTe_f8NyEqcNepMYphKHGpE5W8SJGBt_DyaZbnQbHjBm8xJGuDxm6QhITAA6cbVcIom2uwrs4iAaIDDhEJ0c1Clgjg8lHfF9QFzZ96XcDfGfmJgI2OZRFjceAe9L2MKslmm7nI"/>
+            </div>
+            <div class="card-body px-2">
+              <h3 class="fluid-h3 font-headline text-primary mb-2">Hollywood Peel</h3>
+              <p class="text-on-surface-variant mb-4 text-sm line-clamp-2">Peeling de Carbón Activado. Rejuvenecimiento facial con resultados inmediatos.</p>
+            </div>
+            <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10">
+              <div class="flex items-baseline gap-2">
+                <span class="font-semibold text-lg text-primary">₡22,500</span>
+                <span class="text-xs line-through text-outline">₡30,000</span>
+              </div>
+              <button data-treatment="Hollywood Peel" class="text-primary font-bold hover:underline flex items-center gap-1 text-sm">
+                Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- PRP Capilar -->
+          <div class="reveal reveal-stagger-4 group bg-surface-container-lowest p-4 rounded-lg hover:shadow-2xl transition-all duration-500 catalog-offset md:translate-y-6">
+            <div class="aspect-square rounded-lg overflow-hidden mb-4">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" alt="PRP Capilar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdbe__XEv1FKxX3xR2AOeX9G2wS577ReTycNW-45Eo9X0GJBwPnkZf8XKoQ4c6DXmnQpkEGhGDJ0AJ9yYcwPFO1OVa2nirzJj3oOrJJrRmrOIkDSzEvhH7aAE63G_1tmWJW2zCyWrzgu3cxcu11TGbJRrSaIwzy8PGA1rxeyphCwCN1PbQVwCdjCDmkVQxg9dw31qkZA3riCP4oxgM56QdY0c35XbOXAlwqPL0h2hMeoUnARwvD6L_e8gVrn-T3bQHSZeNoV6wWiQ"/>
+            </div>
+            <div class="card-body px-2">
+              <h3 class="fluid-h3 font-headline text-primary mb-2">PRP Capilar</h3>
+              <p class="text-on-surface-variant mb-4 text-sm line-clamp-2">Estimulación del folículo capilar para evitar la caída y mejorar la densidad.</p>
+            </div>
+            <div class="flex justify-between items-center px-2 pt-4 border-t border-outline-variant/10">
+              <div class="flex items-baseline gap-2">
+                <span class="font-semibold text-lg text-primary">₡50,000</span>
+                <span class="text-xs line-through text-outline">₡70,000</span>
+              </div>
+              <button data-treatment="PRP Capilar" class="text-primary font-bold hover:underline flex items-center gap-1 text-sm">
+                Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ BENEFICIOS ═══════════════════ -->
+    <section id="beneficios" class="section-py section-px bg-surface-container">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-10 md:mb-20 reveal">
+          <h2 class="fluid-h2 font-headline text-on-surface mb-4">Beneficios de Elegirnos</h2>
+          <div class="flex justify-center gap-1 text-primary mb-4 md:mb-6">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+          </div>
+          <p class="text-on-surface-variant max-w-xl mx-auto text-sm md:text-base">Atención profesional, resultados reales y un espacio pensado para tu bienestar.</p>
+        </div>
+        <div class="benefits-grid">
+          <!-- Benefit 1 -->
+          <div class="reveal reveal-stagger-1 bg-surface-container-low p-6 md:p-10 rounded-lg text-center hover:shadow-lg transition-all">
+            <div class="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 rounded-full bg-primary-container flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">water_drop</span>
+            </div>
+            <h4 class="font-headline text-base md:text-lg font-semibold mb-2 md:mb-4 text-on-surface">Hidratación Profunda</h4>
+            <p class="text-on-surface-variant text-xs md:text-sm leading-relaxed">Restauramos los niveles óptimos de agua en tu piel y organismo.</p>
+          </div>
+          <!-- Benefit 2 -->
+          <div class="reveal reveal-stagger-2 bg-surface-container-low p-6 md:p-10 rounded-lg text-center hover:shadow-lg transition-all md:-translate-y-4">
+            <div class="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 rounded-full bg-secondary-container flex items-center justify-center">
+              <span class="material-symbols-outlined text-on-secondary-container text-2xl md:text-3xl">auto_awesome</span>
+            </div>
+            <h4 class="font-headline text-base md:text-lg font-semibold mb-2 md:mb-4 text-on-surface">Rejuvenecimiento</h4>
+            <p class="text-on-surface-variant text-xs md:text-sm leading-relaxed">Estimulamos la producción natural de colágeno y elastina.</p>
+          </div>
+          <!-- Benefit 3 -->
+          <div class="reveal reveal-stagger-3 bg-surface-container-low p-6 md:p-10 rounded-lg text-center hover:shadow-lg transition-all">
+            <div class="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 rounded-full bg-tertiary-container flex items-center justify-center">
+              <span class="material-symbols-outlined text-on-tertiary-container text-2xl md:text-3xl">bolt</span>
+            </div>
+            <h4 class="font-headline text-base md:text-lg font-semibold mb-2 md:mb-4 text-on-surface">Vitalidad Celular</h4>
+            <p class="text-on-surface-variant text-xs md:text-sm leading-relaxed">Mejoramos el rendimiento de tus células para un brillo interno.</p>
+          </div>
+          <!-- Benefit 4 -->
+          <div class="reveal reveal-stagger-4 bg-surface-container-low p-6 md:p-10 rounded-lg text-center hover:shadow-lg transition-all md:-translate-y-4">
+            <div class="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 rounded-full bg-primary-container flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">health_and_safety</span>
+            </div>
+            <h4 class="font-headline text-base md:text-lg font-semibold mb-2 md:mb-4 text-on-surface">Salud Sistémica</h4>
+            <p class="text-on-surface-variant text-xs md:text-sm leading-relaxed">Fortalecemos tu sistema inmune con terapias integrales.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ CTA ═══════════════════ -->
+    <section class="section-py section-px reveal">
+      <div class="max-w-5xl mx-auto">
+        <div class="bg-surface-container-lowest rounded-xl p-6 md:p-12 shadow-2xl flex flex-col md:flex-row gap-8 md:gap-12 items-start md:items-center cta-block">
+
+          <div class="flex-1 cta-left w-full">
+            <h2 class="fluid-h3 font-headline text-primary mb-4 md:mb-6 text-xl md:text-3xl">Comienza tu camino hacia el bienestar</h2>
+            <p class="text-on-surface-variant mb-6 md:mb-8 text-sm md:text-base">Agenda una valoración inicial y diseña tu protocolo personalizado. Atención profesional y resultados que se notan.</p>
+            <div class="flex flex-col sm:flex-row gap-3 cta-btns">
+              <button data-wa="Hola, quiero reservar una cita para iniciar mi tratamiento." class="cta-gradient text-on-primary px-8 py-4 rounded-full font-semibold text-base md:text-lg shadow-lg shadow-primary/30 hover:shadow-xl transition-all text-center flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined">calendar_month</span>
+                Agendar Cita
+              </button>
+              <a href="tel:+50660024222" class="bg-surface-container-highest text-on-secondary-container px-8 py-4 rounded-full font-semibold hover:bg-surface-dim transition-colors text-center inline-flex items-center justify-center gap-2 text-base md:text-lg">
+                <span class="material-symbols-outlined">phone</span>
+                Llamar Ahora
+              </a>
+            </div>
+          </div>
+
+          <div class="flex-1 cta-right bg-surface-container-low rounded-lg p-6 md:p-8 border border-outline-variant/10 w-full">
+            <div class="flex items-center gap-4 mb-6 md:mb-8">
+              <div class="w-11 h-11 md:w-12 md:h-12 rounded-full bg-primary-container flex items-center justify-center text-primary flex-shrink-0">
+                <span class="material-symbols-outlined">verified</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm md:text-base">Licda en Enfermería</h4>
+                <p class="text-xs md:text-sm text-on-surface-variant">Código 23788 — Profesional certificada</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 mb-6 md:mb-8">
+              <div class="w-11 h-11 md:w-12 md:h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container flex-shrink-0">
+                <span class="material-symbols-outlined">spa</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm md:text-base">Atención Personalizada</h4>
+                <p class="text-xs md:text-sm text-on-surface-variant">Protocolos diseñados según tus necesidades</p>
+              </div>
+            </div>
+            <div class="p-4 md:p-6 bg-white rounded-lg italic text-on-surface-variant text-xs md:text-sm border-l-4 border-primary">
+              "Resultados visibles desde la primera sesión. Un enfoque profesional y humano que marca la diferencia."
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════ WHATSAPP FAB ═══════════════════ -->
+  <div class="fab-wrap">
+    <div class="fab-ring"></div>
+    <a href="https://wa.me/50660024222?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita." target="_blank" rel="noopener"
+       aria-label="Contactar por WhatsApp"
+       class="relative z-10 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:bg-[#128C7E] active:scale-90 transition-all">
+      <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.243-1.214l-.294-.175-2.867.852.852-2.867-.175-.294A8 8 0 1112 20z"/></svg>
+    </a>
+  </div>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="bg-slate-50 py-10 md:py-12 section-px" style="padding-bottom: calc(2.5rem + env(safe-area-inset-bottom))">
+    <div class="max-w-7xl mx-auto reveal">
+      <div class="footer-inner flex flex-col md:flex-row justify-between items-center gap-6 mb-8 md:mb-12">
+        <div class="font-headline text-lg font-bold text-purple-900 italic">Sueroterapia</div>
+        <div class="flex flex-wrap justify-center gap-6 md:gap-8">
+          <a class="text-slate-500 hover:text-purple-700 transition-colors text-sm" href="#">Instagram</a>
+          <a class="text-slate-500 hover:text-purple-700 transition-colors text-sm" href="#">Facebook</a>
+          <a class="text-slate-500 hover:text-purple-700 transition-colors text-sm" href="tel:+50660024222">Llámanos</a>
+        </div>
+        <div class="flex gap-4">
+          <span class="material-symbols-outlined text-purple-900">spa</span>
+          <span class="material-symbols-outlined text-purple-900">favorite</span>
+          <span class="material-symbols-outlined text-purple-900">healing</span>
+        </div>
+      </div>
+      <div class="text-center text-slate-400 text-xs tracking-widest uppercase">
+        @Sueroterapia · © 2026 Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Drawer close button extra handler -->
+  <script>
+    document.getElementById('drawer-close')?.addEventListener('click', () => {
+      document.getElementById('nav-drawer')?.classList.add('-translate-x-full');
+      document.getElementById('drawer-overlay')?.classList.add('hidden');
+      document.body.style.overflow = '';
+    });
+  </script>
+
+</body>
+</html>
